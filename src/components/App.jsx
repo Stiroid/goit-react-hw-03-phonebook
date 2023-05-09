@@ -17,6 +17,14 @@ export class App extends React.Component {
     filter: '',
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log("Updata")
+    if (this.state.contacts !== prevState.contacts){
+      localStorage.setItem("data", JSON.stringify(this.state.contacts))
+
+    } 
+}
+
   handleInputChange = event => {
     this.setState({
       [event.target.name]: event.target.value
@@ -47,6 +55,16 @@ export class App extends React.Component {
     return this.state.contacts.filter(contact =>
       contact.name.toLowerCase().includes(contactToLowerCase)
     )
+  }
+
+  componentDidMount() {
+    const contactData = localStorage.getItem("data")
+    const parsedUserContact = JSON.parse(contactData)
+    console.log(parsedUserContact)
+
+    if(parsedUserContact !== null){
+      this.setState({contacts:parsedUserContact})
+    } 
   }
 
   render(){
