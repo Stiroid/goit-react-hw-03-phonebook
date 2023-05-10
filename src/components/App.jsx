@@ -92,17 +92,28 @@ export class App extends React.Component {
                 onSubmit ={this.formSubmitHandler}
               />
 
-            <h2>Contacts</h2>
 
-              <Filter 
-                formSubmitHandler= {this.handleInputChange}
-                filter={this.state.filter}
-              />
+              {
+                filterContact.length > 0 &&
+                
+                (
+                <div>
+                  <h2>Contacts</h2>
 
-              <ContactList
-                onRemoveContact = {this.onRemoveContact}
-                filteredContacts = {filterContact}
-              />
+                <Filter 
+                  formSubmitHandler= {this.handleInputChange}
+                  filter={this.state.filter}
+                />
+
+                <ContactList
+                  onRemoveContact = {this.onRemoveContact}
+                  filteredContacts = {filterContact}
+                />
+                </div>
+                )
+              }
+
+            
 
           </div>
       </div>
